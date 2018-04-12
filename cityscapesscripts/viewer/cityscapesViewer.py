@@ -7,7 +7,7 @@
 #################
 
 # pyqt for everything graphical
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtWidgets, QtGui, QtCore
 # get command line parameters
 import sys
 # walk directories
@@ -44,7 +44,7 @@ from labels_cityPersons import name2labelCp
 #################
 
 # The main class which is a QtGui -> Main Window
-class CityscapesViewer(QtGui.QMainWindow):
+class CityscapesViewer(QtWidgets.QMainWindow):
 
     #############################
     ## Construction / Destruction
@@ -180,14 +180,14 @@ class CityscapesViewer(QtGui.QMainWindow):
         iconDir = os.path.join( os.path.dirname(sys.argv[0]) , 'icons' )
 
         # Loading a new city
-        loadAction = QtGui.QAction(QtGui.QIcon( os.path.join( iconDir , 'open.png' )), '&Tools', self)
+        loadAction = QtWidgets.QAction(QtGui.QIcon( os.path.join( iconDir , 'open.png' )), '&Tools', self)
         loadAction.setShortcuts(['o'])
         self.setTip( loadAction, 'Open city' )
         loadAction.triggered.connect( self.getCityFromUser )
         self.toolbar.addAction(loadAction)
 
         # Open previous image
-        backAction = QtGui.QAction(QtGui.QIcon( os.path.join( iconDir , 'back.png')), '&Tools', self)
+        backAction = QtWidgets.QAction(QtGui.QIcon( os.path.join( iconDir , 'back.png')), '&Tools', self)
         backAction.setShortcut('left')
         backAction.setStatusTip('Previous image')
         backAction.triggered.connect( self.prevImage )
@@ -195,7 +195,7 @@ class CityscapesViewer(QtGui.QMainWindow):
         self.actImageNotFirst.append(backAction)
 
         # Open next image
-        nextAction = QtGui.QAction(QtGui.QIcon( os.path.join( iconDir , 'next.png')), '&Tools', self)
+        nextAction = QtWidgets.QAction(QtGui.QIcon( os.path.join( iconDir , 'next.png')), '&Tools', self)
         nextAction.setShortcut('right')
         self.setTip( nextAction, 'Next image' )
         nextAction.triggered.connect( self.nextImage )
@@ -203,7 +203,7 @@ class CityscapesViewer(QtGui.QMainWindow):
         self.actImageNotLast.append(nextAction)
 
         # Play
-        playAction = QtGui.QAction(QtGui.QIcon( os.path.join( iconDir , 'play.png')), '&Tools', self)
+        playAction = QtWidgets.QAction(QtGui.QIcon( os.path.join( iconDir , 'play.png')), '&Tools', self)
         playAction.setShortcut(' ')
         playAction.setCheckable(True)
         playAction.setChecked(False)
@@ -214,7 +214,7 @@ class CityscapesViewer(QtGui.QMainWindow):
         self.playAction = playAction
 
         # Select image
-        selImageAction = QtGui.QAction(QtGui.QIcon( os.path.join( iconDir , 'shuffle.png' )), '&Tools', self)
+        selImageAction = QtWidgets.QAction(QtGui.QIcon( os.path.join( iconDir , 'shuffle.png' )), '&Tools', self)
         selImageAction.setShortcut('i')
         self.setTip( selImageAction, 'Select image' )
         selImageAction.triggered.connect( self.selectImage )
@@ -223,7 +223,7 @@ class CityscapesViewer(QtGui.QMainWindow):
 
         # Enable/disable disparity visu. Toggle button
         if self.enableDisparity:
-            dispAction = QtGui.QAction(QtGui.QIcon( os.path.join( iconDir , 'disp.png' )), '&Tools', self)
+            dispAction = QtWidgets.QAction(QtGui.QIcon( os.path.join( iconDir , 'disp.png' )), '&Tools', self)
             dispAction.setShortcuts(['d'])
             dispAction.setCheckable(True)
             dispAction.setChecked(self.showDisparity)
@@ -233,7 +233,7 @@ class CityscapesViewer(QtGui.QMainWindow):
             self.actImage.append(dispAction)
 
         # Enable/disable zoom. Toggle button
-        zoomAction = QtGui.QAction(QtGui.QIcon( os.path.join( iconDir , 'zoom.png' )), '&Tools', self)
+        zoomAction = QtWidgets.QAction(QtGui.QIcon( os.path.join( iconDir , 'zoom.png' )), '&Tools', self)
         zoomAction.setShortcuts(['z'])
         zoomAction.setCheckable(True)
         zoomAction.setChecked(self.zoom)
@@ -243,35 +243,35 @@ class CityscapesViewer(QtGui.QMainWindow):
         self.actImage.append(zoomAction)
 
         # Decrease transparency
-        minusAction = QtGui.QAction(QtGui.QIcon( os.path.join( iconDir , 'minus.png' )), '&Tools', self)
+        minusAction = QtWidgets.QAction(QtGui.QIcon( os.path.join( iconDir , 'minus.png' )), '&Tools', self)
         minusAction.setShortcut('-')
         self.setTip( minusAction, 'Decrease transparency' )
         minusAction.triggered.connect( self.minus )
         self.toolbar.addAction(minusAction)
 
         # Increase transparency
-        plusAction = QtGui.QAction(QtGui.QIcon( os.path.join( iconDir , 'plus.png' )), '&Tools', self)
+        plusAction = QtWidgets.QAction(QtGui.QIcon( os.path.join( iconDir , 'plus.png' )), '&Tools', self)
         plusAction.setShortcut('+')
         self.setTip( plusAction, 'Increase transparency' )
         plusAction.triggered.connect( self.plus )
         self.toolbar.addAction(plusAction)
 
         # Display path to current image in message bar
-        displayFilepathAction = QtGui.QAction(QtGui.QIcon( os.path.join( iconDir , 'filepath.png' )), '&Tools', self)
+        displayFilepathAction = QtWidgets.QAction(QtGui.QIcon( os.path.join( iconDir , 'filepath.png' )), '&Tools', self)
         displayFilepathAction.setShortcut('f')
         self.setTip( displayFilepathAction, 'Show path to current image' )
         displayFilepathAction.triggered.connect( self.displayFilepath )
         self.toolbar.addAction(displayFilepathAction)
 
         # Display help message
-        helpAction = QtGui.QAction(QtGui.QIcon( os.path.join( iconDir , 'help19.png' )), '&Tools', self)
+        helpAction = QtWidgets.QAction(QtGui.QIcon( os.path.join( iconDir , 'help19.png' )), '&Tools', self)
         helpAction.setShortcut('h')
         self.setTip( helpAction, 'Help' )
         helpAction.triggered.connect( self.displayHelpMessage )
         self.toolbar.addAction(helpAction)
 
         # Close the application
-        exitAction = QtGui.QAction(QtGui.QIcon( os.path.join( iconDir , 'exit.png' )), '&Tools', self)
+        exitAction = QtWidgets.QAction(QtGui.QIcon( os.path.join( iconDir , 'exit.png' )), '&Tools', self)
         exitAction.setShortcuts(['Esc'])
         self.setTip( exitAction, 'Exit' )
         exitAction.triggered.connect( self.close )
@@ -356,7 +356,7 @@ class CityscapesViewer(QtGui.QMainWindow):
         dlgTitle = "Select image to load"
         self.statusBar().showMessage(dlgTitle)
         items = QtCore.QStringList( [ os.path.basename(i) for i in self.images ] )
-        (item, ok) = QtGui.QInputDialog.getItem(self, dlgTitle, "Image", items, self.idx, False)
+        (item, ok) = QtWidgets.QInputDialog.getItem(self, dlgTitle, "Image", items, self.idx, False)
         if (ok and item):
             idx = items.indexOf(item)
             if idx != self.idx:
@@ -416,7 +416,7 @@ class CityscapesViewer(QtGui.QMainWindow):
         message += " - show path to image below [f]\n"
         message += " - exit viewer [esc]\n"
 
-        QtGui.QMessageBox.about(self, "HELP!", message)
+        QtWidgets.QMessageBox.about(self, "HELP!", message)
         self.update()
 
 
@@ -620,7 +620,7 @@ class CityscapesViewer(QtGui.QMainWindow):
         qp.end()
 
         # Forward the paint event
-        QtGui.QMainWindow.paintEvent(self,event)
+        QtWidgets.QMainWindow.paintEvent(self,event)
 
     # Update the scaling
     def updateScale(self, qp):
@@ -1023,22 +1023,22 @@ class CityscapesViewer(QtGui.QMainWindow):
     def wheelEvent(self, event):
         ctrlPressed = event.modifiers() & QtCore.Qt.ControlModifier
 
-        deltaDegree = event.delta() / 8 # Rotation in degree
+        deltaDegree = event.angleDelta() / 8 # Rotation in degree
         deltaSteps  = deltaDegree / 15 # Usually one step on the mouse is 15 degrees
 
         if ctrlPressed:
-            self.transp = max(min(self.transp+(deltaSteps*0.1),1.0),0.0)
+            self.transp = max(min(self.transp+(deltaSteps.y()*0.1),1.0),0.0)
             self.update()
         else:
             if self.zoom:
                 # If shift is pressed, change zoom window size
                 if event.modifiers() and QtCore.Qt.Key_Shift:
-                    self.zoomSize += deltaSteps * 10
+                    self.zoomSize += deltaSteps.y() * 10
                     self.zoomSize = max( self.zoomSize, 10   )
                     self.zoomSize = min( self.zoomSize, 1000 )
                 # Change zoom factor
                 else:
-                    self.zoomFactor += deltaSteps * 0.05
+                    self.zoomFactor += deltaSteps.y() * 0.05
                     self.zoomFactor = max( self.zoomFactor, 0.1 )
                     self.zoomFactor = min( self.zoomFactor, 10 )
                 self.update()
@@ -1109,7 +1109,7 @@ class CityscapesViewer(QtGui.QMainWindow):
 
         if items:
             # Create and wait for dialog
-            (item, ok) = QtGui.QInputDialog.getItem(self, dlgTitle, question,
+            (item, ok) = QtWidgets.QInputDialog.getItem(self, dlgTitle, question,
                                                     items, 0, False)
 
             # Restore message
@@ -1140,9 +1140,9 @@ class CityscapesViewer(QtGui.QMainWindow):
             warning += " - set CITYSCAPES_DATASET to the Cityscapes root folder\n"
             warning += "       e.g. 'export CITYSCAPES_DATASET=<root_path>'\n"
 
-            reply = QtGui.QMessageBox.information(self, "ERROR!", warning,
-                                                  QtGui.QMessageBox.Ok)
-            if reply == QtGui.QMessageBox.Ok:
+            reply = QtWidgets.QMessageBox.information(self, "ERROR!", warning,
+                                                  QtWidgets.QMessageBox.Ok)
+            if reply == QtWidgets.QMessageBox.Ok:
                 sys.exit()
 
         return
@@ -1201,9 +1201,9 @@ class CityscapesViewer(QtGui.QMainWindow):
 
 def main():
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     tool = CityscapesViewer()
-    sys.exit(app.exec_())
+    app.exit(app.exec_())
 
 
 if __name__ == '__main__':
